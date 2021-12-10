@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, { useReducer, useEffect } from "react";
 import { AppRouter } from "./routes/AppRouter";
 import { authReducer } from './Components/auth/authReducer'
 import { AuthContext } from './Components/auth/authContext'
@@ -33,6 +33,18 @@ export const HeroesApp = () => {
    }
     */
    const [userState, dispatch] = useReducer(authReducer, {}, init)
+
+
+   //para grabar en el localsotare necesitamos usar useEffect
+   useEffect(() =>{
+      
+      //si el usario no existe, que no haga nada. 
+      if(!userState) return; 
+
+      //si el usuario si existe, solicitamos que lo guarde en el locastorage
+      localStorage.setItem('userState', JSON.stringify(userState));
+
+   }, [userState])
 
    return (
       <>

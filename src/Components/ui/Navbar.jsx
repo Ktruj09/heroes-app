@@ -1,6 +1,8 @@
 import React, {useContext} from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../auth/authContext";
+import { types } from "../types/types";
+
 
 export const NavBar = () => {
 
@@ -22,12 +24,23 @@ export const NavBar = () => {
 
  //la constante nos queda de la siguiente manera con esto podremos mostrar el nombre
  //nos permite extraer lo que hay. 
- const {userState} = useContext(AuthContext)
+ const {userState, dispatch} = useContext(AuthContext)
 
 
   const navigate = useNavigate();
 
   const handleLogout = () => {
+
+    //definimos nuestra acción para el logged
+    //llamaos el tipo de acción y nuestro payload que es false
+    const action = {
+      type: types.logout,
+      payload: false
+    }
+
+    //luego hacemos el dispatch de nuestra acción
+    dispatch(action)
+    
     navigate("/login", {
       replace: true,
     });
