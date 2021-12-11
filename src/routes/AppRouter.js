@@ -5,6 +5,7 @@ import { Routes, Route, BrowserRouter } from "react-router-dom";
 
 import { LoginScreen } from "../Components/login/LoginScreen";
 import { DashboardRoutes } from './DashboardRoutes'
+import {PrivateRoute} from './PrivateRoute'
 export const AppRouter = () => {
     return (
         <>
@@ -13,8 +14,21 @@ export const AppRouter = () => {
 
 
                 <Routes>
+                     {/** esta ruta es publica */}
                     <Route path="/login" element={<LoginScreen />} />
-                    <Route path="/*" element={<DashboardRoutes />} />
+                   
+                    {/** esta ruta tiene que ser privada, ya que si el usuario no esta logueado, no puede mostrar nada */}
+                    {/**El PrivateRoute será quien verificará si el usuario estar autenticado */}
+                    <Route path="/*" element={
+                       
+                    <PrivateRoute>
+                        <DashboardRoutes/>
+                    </PrivateRoute>
+                
+                }     
+                    />
+                    {/** <Route path="/*" element={<DashboardRoutes />} />*/}
+                    
                 </Routes>
             </BrowserRouter>
 
