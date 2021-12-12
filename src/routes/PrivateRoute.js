@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 
 import { AuthContext } from "../Components/auth/authContext";
 
@@ -24,7 +24,26 @@ export const PrivateRoute = ({ children }) => {
 
     const { userState } = useContext(AuthContext);
 
-    console.log(userState)
+    //con esto podemos ver en que path estamos. 
+    //ejemplo código antes de la destructuración const location = useLocation();
+
+    //ejemplo haciendo un console.log
+   // console.log(location)
+
+   const {pathname, search} = useLocation();
+    
+    //acá decimos que nos cree el laastPath y que guarde el location.pathname 
+    //que es el nombre con el cual aparece donde nos encontramos 
+    //con esto veremos la ultima ruta navegada y será almacenado
+    //luego nos vamos al login para hacer una modificación loginScreen
+    localStorage.setItem('lastPath', pathname + search);
+
+
+    
+    
+
+
+
 
     return userState.logged
      ? children

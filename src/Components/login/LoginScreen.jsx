@@ -32,7 +32,11 @@ export const LoginScreen = () => {
       
       //disparamos la acción
       dispatch(action);
-        navigate('/', {
+
+      //aca creamos una constante para que lea el localstorage
+      //le decimos que nos lleve a lastPath si tiene un registro, si en dado caso esta vacio, nos lleva a Marvel
+      const lastPath = localStorage.getItem('lastPath') || '/marvel';
+        navigate(lastPath, {
          replace: true
       });
 

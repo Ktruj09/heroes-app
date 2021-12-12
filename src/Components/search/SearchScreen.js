@@ -17,6 +17,8 @@ export const SearchScreen = () => {
     //con esto obtenemos el nombre de lo que la persona esta buscando
     //en el location.search es lo que muestra dentro de location y es lo que necesitamos.
     const {q = ''} = queryString.parse(location.search);
+
+
     
 
     const [formValues, handleInputChange] = useForm({
@@ -28,6 +30,8 @@ export const SearchScreen = () => {
     //el memo hára reducir el consumo de memoria de nuestra aplicación
     //y solo se disparará si llega a ver un cambio en el query => q
     const heroesFilter = useMemo(() => getHeroesByName(q), [q])
+
+
 
 
     const { searchText } = formValues;
